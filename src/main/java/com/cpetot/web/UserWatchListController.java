@@ -20,44 +20,37 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cpetot.entities.Movie;
-import com.cpetot.entities.User;
 import com.cpetot.exceptions.MovieNotFoundException;
 import com.cpetot.exceptions.UserNameNotFoundException;
 import com.cpetot.exceptions.UserNotAllowedToWatchException;
 import com.cpetot.services.UserService;
 
-/**
- * Controller para retornar información del watchlist de un {@link User}.
- *
- */
 @RestController
 public class UserWatchListController {
 
 	@Autowired
 	private UserService userService;
 
-	@RequestMapping(value = "/users/{username}/watchlist", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	@GetMapping("/users/{username}/watchlist")
 	public List<Movie> userWatchList(@PathVariable String username) {
 		return this.userService.getWatchList(username);
 	}
 
-	@RequestMapping(value = "/users/{username}/watchlist", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+	@PostMapping("/users/{username}/watchlist")
 	public ResponseEntity<RestResponse> addToWatchList(@PathVariable String username, @RequestBody String movieTitle) {
 		userService.addToWatchList(username, movieTitle);
 		return new ResponseEntity<>(new RestResponse(true, "Movie added succesfully"), HttpStatus.ACCEPTED);
 	}
-
 
 	@ExceptionHandler
 	@ResponseStatus(HttpStatus.NOT_FOUND)
@@ -73,7 +66,7 @@ public class UserWatchListController {
 
 	@ExceptionHandler
 	@ResponseStatus(HttpStatus.UNPROCESSABLE_ENTITY)
-	public  RestResponse handleUserNotAllowedToWatch(UserNotAllowedToWatchException ex) {
+	public RestResponse handleUserNotAllowedToWatch(UserNotAllowedToWatchException ex) {
 		return new RestResponse(false, ex.getMessage());
 	}
 
