@@ -38,7 +38,7 @@ public class UserServiceImpl implements UserService {
 		Movie movie = movieService.getByTitle(movieTitle);
 
 		if (user.getAge() < movie.getRating().minAge()) {
-			throw new UserNotAllowedToWatchException(user.getAge(), movie.getRating().value());
+			throw new UserNotAllowedToWatchException(user.getAge(), movie.getRating().name());
 		}
 
 		movie.setUser(user);

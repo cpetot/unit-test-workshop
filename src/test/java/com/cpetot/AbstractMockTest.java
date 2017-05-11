@@ -32,7 +32,7 @@ public abstract class AbstractMockTest {
 	private Movie testMovie() {
 		Movie movie = mock(Movie.class);
 		when(movie.getTitle()).thenReturn("Man of Steel");
-		when(movie.getRating()).thenReturn(ContentRating.G);
+		when(movie.getRating()).thenReturn(ContentRating.TOUT_PUBLIC);
 		return movie;
 	}
 
