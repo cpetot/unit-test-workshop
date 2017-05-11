@@ -8,7 +8,7 @@ import org.apache.commons.lang3.StringUtils;
 public class MovieParser {
 
 	private MovieParser() {
-		throw new RuntimeException("No debe ser instanciado");
+		// Util
 	}
 
 	public static List<String> parse(String movies) {
