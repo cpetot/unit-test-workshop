@@ -7,7 +7,7 @@ public class MovieAlreadyInWatchlistException extends RuntimeException {
 	private String movieTitle;
 
 	public MovieAlreadyInWatchlistException(String username, String movieTitle) {
-		super("Movie " + movieTitle + " is already in user with username " + username + " watchlist");
+		super(String.format("Movie %s is already in user with username %s watchlist", movieTitle, username));
 		this.username = username;
 		this.movieTitle = movieTitle;
 	}

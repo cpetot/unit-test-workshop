@@ -7,7 +7,7 @@ public class MovieNotFoundException extends RuntimeException {
 	private String title;
 
 	public MovieNotFoundException(String title) {
-		super("Movie with title " + title + " not found");
+		super(String.format("Movie with title %s not found", title));
 		this.title = title;
 	}
 

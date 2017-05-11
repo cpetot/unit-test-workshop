@@ -22,7 +22,7 @@ public class UserNameNotFoundException extends RuntimeException {
 	private String username;
 
 	public UserNameNotFoundException(String username) {
-		super("User with username " + username + " does not exist");
+		super(String.format("User with username %s does not exist", username));
 		this.username = username;
 	}
 

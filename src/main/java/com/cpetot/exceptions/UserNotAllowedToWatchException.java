@@ -9,7 +9,7 @@ public class UserNotAllowedToWatchException extends RuntimeException {
 	private String movieRating;
 
 	public UserNotAllowedToWatchException(Integer userAge, String movieRating) {
-		super("User with age " + userAge + ", are not allowed to watch movies with rating " + movieRating);
+		super(String.format("User with age %s, are not allowed to watch movies with rating %s", userAge, movieRating));
 		this.userAge = userAge;
 		this.movieRating = movieRating;
 	}
