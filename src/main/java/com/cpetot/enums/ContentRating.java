@@ -1,10 +1,11 @@
 package com.cpetot.enums;
 
+// TODO revoir les noms
+
 /**
  * Representa la clasificación de edades de una película.
  *
  * @author rodrigo
- *
  */
 public enum ContentRating {
 

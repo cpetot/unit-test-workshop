@@ -11,12 +11,8 @@ import com.cpetot.repository.MovieRepository;
 @Service
 public class MovieServiceImpl implements MovieService {
 
-	private MovieRepository movieRepo;
-
 	@Autowired
-	public MovieServiceImpl(MovieRepository movieRepo) {
-		this.movieRepo = movieRepo;
-	}
+	private MovieRepository movieRepo;
 
 	@Override
 	public Movie getByTitle(String title) {

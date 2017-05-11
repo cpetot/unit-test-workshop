@@ -16,10 +16,6 @@
 
 package com.cpetot.web;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -43,10 +39,10 @@ public class UserWatchListControllerTest extends AbstractMockTest {
 	private UserWatchListController controller;
 
 	@Before
-    public void setUp() {
+	public void setUp() {
 		MockitoAnnotations.initMocks(this);
 		mvc = MockMvcBuilders.standaloneSetup(this.controller).build();
-    }
+	}
 
 	@Test
 	public void requestingAddPG13MovieToUserUnder13ShouldReturnError() throws Exception {
@@ -63,8 +59,5 @@ public class UserWatchListControllerTest extends AbstractMockTest {
 		// Preguntar por status ACCEPTED
 		Assert.fail();
 	}
-
-
-
 
 }

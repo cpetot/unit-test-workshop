@@ -1,20 +1,16 @@
 package com.cpetot.service;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
 
 import com.cpetot.AbstractMockTest;
 import com.cpetot.repository.UserRepository;
 import com.cpetot.services.MovieService;
 import com.cpetot.services.UserService;
-import com.cpetot.services.UserServiceImpl;
 
 public class UserServiceTest extends AbstractMockTest {
 
@@ -24,16 +20,11 @@ public class UserServiceTest extends AbstractMockTest {
 	@Mock
 	private UserRepository userRepo;
 
+	@InjectMocks
 	private UserService userService;
 
 	@Rule
 	public ExpectedException thrown = ExpectedException.none();
-
-	@Before
-	public void setup() {
-		MockitoAnnotations.initMocks(this);
-		this.userService = new UserServiceImpl(userRepo, movieService);
-	}
 
 	@Test
 	public void findAllShouldReturnAllUsers() {
@@ -78,7 +69,5 @@ public class UserServiceTest extends AbstractMockTest {
 		Assert.fail();
 
 	}
-
-
 
 }

@@ -4,34 +4,35 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
+import com.cpetot.entities.Movie;
 import com.cpetot.entities.User;
 import com.cpetot.exceptions.UserNameNotFoundException;
-import com.cpetot.entities.Movie;
 import com.cpetot.exceptions.UserNotAllowedToWatchException;
+import com.cpetot.repository.MovieRepository;
 import com.cpetot.repository.UserRepository;
 
 @Service
 public class UserServiceImpl implements UserService {
 
 	@Autowired
-	private UserRepository userRepo;
-
-	private MovieService movieService;
+	private UserRepository userRepository;
 
 	@Autowired
-	public UserServiceImpl(UserRepository userRepo, MovieService movieService) {
-		this.userRepo = userRepo;
-		this.movieService = movieService;
-	}
+	private MovieRepository movieRepository;
+
+	@Autowired
+	private MovieService movieService;
 
 	@Override
 	public List<User> findAll() {
-		return userRepo.findAll();
+		return userRepository.findAll();
 	}
 
 	@Override
+	@Transactional
 	public void addToWatchList(String username, String movieTitle) {
 		User user = this.getUser(username);
 		Movie movie = movieService.getByTitle(movieTitle);
@@ -40,8 +41,8 @@ public class UserServiceImpl implements UserService {
 			throw new UserNotAllowedToWatchException(user.getAge(), movie.getRating().value());
 		}
 
-		user.getWatchList().add(movie);
-		userRepo.save(user);
+		movie.setUser(user);
+		userRepository.save(user);
 	}
 
 	@Override
@@ -53,7 +54,7 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public User getUser(String username) {
 		Assert.notNull(username, "Username must not be null");
-		User user = this.userRepo.findByUsername(username);
+		User user = this.userRepository.findByUsername(username);
 		if (user == null) {
 			throw new UserNameNotFoundException(username);
 		}
