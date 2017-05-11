@@ -1,11 +1,7 @@
 package com.cpetot.exceptions;
 
-
 public class UserNotAllowedToWatchException extends RuntimeException {
 
-	/**
-	 *
-	 */
 	private static final long serialVersionUID = 1L;
 
 	private Integer userAge;
@@ -22,16 +18,8 @@ public class UserNotAllowedToWatchException extends RuntimeException {
 		return userAge;
 	}
 
-	public void setUserAge(Integer userAge) {
-		this.userAge = userAge;
-	}
-
 	public String getMovieRating() {
 		return movieRating;
-	}
-
-	public void setMovieRating(String movieRating) {
-		this.movieRating = movieRating;
 	}
 
 }
