@@ -19,12 +19,8 @@ import com.cpetot.services.UserService;
 @RequestMapping("/users")
 public class UserController {
 
-	private UserService userService;
-
 	@Autowired
-	public UserController(UserService userService) {
-		this.userService = userService;
-	}
+	private UserService userService;
 
 	@GetMapping
 	public List<User> findAll() {
