@@ -30,24 +30,6 @@ public class UserService {
 		return userRepository.findAll();
 	}
 
-	@Transactional
-	public void addToWatchList(String username, String movieTitle) {
-		User user = this.getUser(username);
-		Movie movie = movieService.getByTitle(movieTitle);
-
-		if (user.getAge() < movie.getRating().minAge()) {
-			throw new UserNotAllowedToWatchException(user.getAge(), movie.getRating().name());
-		}
-
-		movie.setUser(user);
-		userRepository.save(user);
-	}
-
-	public List<Movie> getWatchList(String username) {
-		User user = this.getUser(username);
-		return user.getWatchList();
-	}
-
 	public User getUser(String username) {
 		Assert.notNull(username, "Username must not be null");
 		User user = this.userRepository.findByUsername(username);
@@ -57,13 +39,22 @@ public class UserService {
 		return user;
 	}
 
-	private boolean movieInWatchlist(List<Movie> watchList, Movie movie) {
-		for (Movie currentMovie : watchList) {
-			if (currentMovie.getTitle().equalsIgnoreCase(movie.getTitle())) {
-				return true;
-			}
+	@Transactional
+	public void addToWatchList(String username, String movieTitle) {
+		User user = this.getUser(username);
+		Movie movie = movieService.getByTitle(movieTitle);
+
+		if (movie.isAvailableForAge(user.getAge())) {
+			throw new UserNotAllowedToWatchException(user.getAge(), movie.getRating().name());
 		}
-		return false;
+
+		user.addWatchMovie(movie);
+		userRepository.save(user);
+	}
+
+	public List<Movie> getWatchList(String username) {
+		User user = this.getUser(username);
+		return user.getWatchList();
 	}
 
 }

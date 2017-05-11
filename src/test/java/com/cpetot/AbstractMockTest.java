@@ -3,49 +3,39 @@ package com.cpetot;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-import java.io.IOException;
 import java.util.Arrays;
-import java.util.List;
+
+import org.apache.commons.lang3.ArrayUtils;
 
 import com.cpetot.entities.Movie;
 import com.cpetot.entities.User;
 import com.cpetot.enums.ContentRating;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 public abstract class AbstractMockTest {
 
-	private static final ObjectMapper mapper = new ObjectMapper();
-
-	protected List<User> testUsers() {
-		return Arrays.asList(testUser());
+	protected User mockUser() {
+		return mockUser("acucumel", 28, mockMovie());
 	}
 
-	protected User testUser() {
+	protected User mockUser(String username, Integer age, Movie... movies) {
 		User user = mock(User.class);
-		when(user.getUsername()).thenReturn("clark");
-		when(user.getAge()).thenReturn(33);
-		when(user.getWatchList()).thenReturn(Arrays.asList(testMovie()));
+		when(user.getUsername()).thenReturn(username);
+		when(user.getAge()).thenReturn(age);
+		if (ArrayUtils.isNotEmpty(movies)) {
+			when(user.getWatchList()).thenReturn(Arrays.asList(movies));
+		}
 		return user;
 	}
 
-	private Movie testMovie() {
+	private Movie mockMovie() {
+		return mockMovie("Man of Steel", ContentRating.TOUT_PUBLIC);
+	}
+
+	private Movie mockMovie(String title, ContentRating rating) {
 		Movie movie = mock(Movie.class);
-		when(movie.getTitle()).thenReturn("Man of Steel");
-		when(movie.getRating()).thenReturn(ContentRating.TOUT_PUBLIC);
+		when(movie.getTitle()).thenReturn(title);
+		when(movie.getRating()).thenReturn(rating);
 		return movie;
-	}
-
-	protected String usersAsJson() throws JsonProcessingException {
-		return mapToJson(testUsers());
-	}
-
-	protected String mapToJson(Object obj) throws JsonProcessingException {
-		return mapper.writeValueAsString(obj);
-	}
-
-	protected Object mapToObject(String contentAsString, Class<?> clazz) throws IOException {
-		return mapper.readValue(contentAsString, clazz);
 	}
 
 }

@@ -18,6 +18,7 @@ public class WebConfiguration extends WebMvcConfigurerAdapter {
 
 	@Override
 	public void addViewControllers(ViewControllerRegistry registry) {
+		// Redirige la home page sur l'interface de Swagger
 		registry.addViewController("/").setViewName("redirect:/swagger-ui.html");
 		registry.setOrder(Ordered.HIGHEST_PRECEDENCE);
 		super.addViewControllers(registry);

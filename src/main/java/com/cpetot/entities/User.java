@@ -5,9 +5,14 @@ import javax.persistence.AccessType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -27,10 +32,27 @@ public class User {
 	private Integer age;
 
 	@JsonIgnore
-	@OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+	@ManyToMany(fetch = FetchType.LAZY)
+	@JoinTable(name = "join_user_watch_movies",
+			joinColumns = @JoinColumn(
+					name = "user_id",
+					nullable = false,
+					foreignKey = @ForeignKey(name = "user_fk")
+			),
+			inverseJoinColumns = @JoinColumn(
+					name = "movie_id",
+					nullable = false,
+					foreignKey = @ForeignKey(name = "movie_fk")
+			)
+	)
 	private List<Movie> watchList;
 
 	public User() {
+		watchList = new ArrayList<>();
+	}
+
+	public void addWatchMovie(Movie movie) {
+		watchList.add(movie);
 	}
 
 	public Long getId() {
@@ -46,6 +68,6 @@ public class User {
 	}
 
 	public List<Movie> getWatchList() {
-		return watchList;
+		return Collections.unmodifiableList(watchList);
 	}
 }
