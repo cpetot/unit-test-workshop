@@ -1,4 +1,4 @@
-package com.cpetot;
+package com.cpetot.workshop.tu;
 
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
