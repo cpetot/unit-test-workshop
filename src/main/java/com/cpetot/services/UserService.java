@@ -10,7 +10,6 @@ import org.springframework.util.Assert;
 import com.cpetot.entities.Movie;
 import com.cpetot.entities.User;
 import com.cpetot.exceptions.UserNameNotFoundException;
-import com.cpetot.exceptions.UserNotAllowedToWatchException;
 import com.cpetot.repository.MovieRepository;
 import com.cpetot.repository.UserRepository;
 
@@ -43,10 +42,6 @@ public class UserService {
 	public void addToWatchList(String username, String movieTitle) {
 		User user = this.getUser(username);
 		Movie movie = movieService.getByTitle(movieTitle);
-
-		if (!movie.isAvailableForAge(user.getAge())) {
-			throw new UserNotAllowedToWatchException(user.getAge(), movie.getRating().name());
-		}
 
 		user.addWatchMovie(movie);
 		userRepository.save(user);

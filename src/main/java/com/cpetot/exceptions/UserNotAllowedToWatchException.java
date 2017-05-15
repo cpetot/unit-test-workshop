@@ -1,5 +1,7 @@
 package com.cpetot.exceptions;
 
+import com.cpetot.enums.ContentRating;
+
 public class UserNotAllowedToWatchException extends RuntimeException {
 
 	private static final long serialVersionUID = 1L;
@@ -8,10 +10,10 @@ public class UserNotAllowedToWatchException extends RuntimeException {
 
 	private String movieRating;
 
-	public UserNotAllowedToWatchException(Integer userAge, String movieRating) {
+	public UserNotAllowedToWatchException(Integer userAge, ContentRating movieRating) {
 		super(String.format("User with age %s, are not allowed to watch movies with rating %s", userAge, movieRating));
 		this.userAge = userAge;
-		this.movieRating = movieRating;
+		this.movieRating = movieRating.name();
 	}
 
 	public Integer getUserAge() {
