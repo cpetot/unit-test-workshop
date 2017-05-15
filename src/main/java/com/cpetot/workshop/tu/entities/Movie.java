@@ -42,6 +42,10 @@ public class Movie {
 		return minAge >= rating.minAge();
 	}
 
+	public void updateLastWatch() {
+		this.lastWatch = new Date();
+	}
+
 	public ContentRating getRating() {
 		return rating;
 	}
