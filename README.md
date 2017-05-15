@@ -16,7 +16,7 @@ Il n'y a pas d'IHM mais Swagger permet d'appeler facilement l'API.
 1. Cloner le projet
 
     ```
-    $ git clone git@github.fiducial.dom:c-petot/test-workshop.git
+    $ git clone https://github.com/cpetot/unit-test-workshop.git
     ```
 
 2. Exécuter le projet
