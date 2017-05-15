@@ -1,4 +1,4 @@
-package com.cpetot.workshop.tu;
+package com.cpetot;
 
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -16,12 +16,6 @@ public class MockInitialisations {
 		Movie movie = mock(Movie.class);
 		when(movie.getTitle()).thenReturn(title);
 		when(movie.getRating()).thenReturn(contentRating);
-		return movie;
-	}
-
-	public static Movie mockMovieAvailableForAge(int age, boolean available) {
-		Movie movie = mock(Movie.class);
-		when(movie.isAvailableForAge(age)).thenReturn(available);
 		return movie;
 	}
 }
