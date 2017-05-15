@@ -63,6 +63,7 @@ public class User {
 			throw new MovieAlreadyInWatchlistException(username, movie.getTitle());
 		}
 		watchList.add(movie);
+		movie.updateLastWatch();
 	}
 
 	public Long getId() {
