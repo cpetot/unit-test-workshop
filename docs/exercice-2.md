@@ -1,6 +1,7 @@
 # Exercice 2 : On combine avec Mockito
 
 Le but de l'exercice est d'apprendre à utiliser Mockito et d'écrire en TDD.
+NB : Pensez aux méthodes Mockito.mock, Mockito.verify, etc.
 
 ### 1. Ajout du dernier visionnage d'un film.
 
