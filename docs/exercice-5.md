@@ -4,8 +4,11 @@ Bravo, tu es vraiment allé vite !
 Le but de l'exercice est d'apprendre comment capturer des arguments avec Mockito.
 
 ### 1. Permettez à l'application de créer un film
-- Modifiez le repository et le service pour permettre la création d'un film.
-- On doit avoir une erreur lorsqu'on cherche à créer un film qui existe déjà.
+- Modifiez le controleur et le service pour permettre de créer un film à partir d'un titre et d'un rating.
+- Faites en sorte que ces données soient obligatoires.
+- On doit avoir une erreur lorsqu'on cherche à créer un film qui existe déjà avec le même titre.
+
+NB : il doit s'agit d'une requête POST avec 2 @RequestParam
 
 ### 2. Tests de la méthode de création
 - Utilisez un ArgumentCaptor pour vérifier le Movie enregistré par le repository.
