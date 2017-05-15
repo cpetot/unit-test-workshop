@@ -1,6 +1,5 @@
 package com.cpetot.workshop.tu.service;
 
-import static java.util.Arrays.asList;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.Mockito.mock;
@@ -113,7 +112,7 @@ public class UserServiceTest {
 		User user = mock(User.class);
 		when(userRepository.findByUsername(username)).thenReturn(user);
 
-		List<Movie> movies = asList(mock(Movie.class), mock(Movie.class));
+		List<Movie> movies = List.of(mock(Movie.class), mock(Movie.class));
 		when(user.getWatchList()).thenReturn(movies);
 
 		// When

@@ -8,6 +8,8 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 import com.cpetot.workshop.tu.enums.ContentRating;
@@ -20,9 +22,11 @@ public class Movie {
 	@GeneratedValue
 	private Long id;
 
+	@NotBlank(message = "le titre est obligatoire")
 	@Column(unique = true, nullable = false)
 	private String title;
 
+	@NotNull(message = "le rating est obligatoire")
 	@Column(nullable = false)
 	@Enumerated(EnumType.STRING)
 	private ContentRating rating;
@@ -36,6 +40,11 @@ public class Movie {
 	public Movie(ContentRating rating) {
 		this();
 		this.rating = rating;
+	}
+
+	public Movie(String title, ContentRating rating) {
+		this(rating);
+		this.title = title;
 	}
 
 	public boolean isAvailableForAge(int minAge) {

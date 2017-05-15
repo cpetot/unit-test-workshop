@@ -6,9 +6,12 @@ import java.util.stream.Collectors;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
+import com.cpetot.exceptions.MovieAlreadyExistException;
 import com.cpetot.workshop.tu.entities.Movie;
+import com.cpetot.workshop.tu.enums.ContentRating;
 import com.cpetot.workshop.tu.exceptions.MovieNotFoundException;
 import com.cpetot.workshop.tu.repository.MovieRepository;
 
@@ -31,5 +34,14 @@ public class MovieService {
 		return movieRepository.findAll().stream()
 				.filter(movie -> movie.isAvailableForAge(minAge))
 				.collect(Collectors.toList());
+	}
+
+	@Transactional
+	public Movie create(String title, ContentRating rating) {
+		if (movieRepository.findByTitle(title) != null) {
+			throw new MovieAlreadyExistException(title);
+		}
+
+		return movieRepository.save(new Movie(title, rating));
 	}
 }
