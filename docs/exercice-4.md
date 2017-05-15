@@ -21,3 +21,4 @@ Allez lire la méthode correspondante dans le service : son implémentation est 
 - Etudiez ce que propose assertThat(aList) pour avoir le test le plus lisible puis écrivez les tests.
 - Modifiez la méthode pour qu'elle ait le comportement désiré en vous appuyant sur les tests écrits.
 
+NB : le but du test est de faire le filtre en mémoire, pas en base de données.
