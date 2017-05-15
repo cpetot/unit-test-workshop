@@ -6,9 +6,12 @@ import java.util.List;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import com.cpetot.entities.Movie;
+import com.cpetot.enums.ContentRating;
+import com.cpetot.exceptions.MovieAlreadyExistException;
 import com.cpetot.exceptions.MovieNotFoundException;
 import com.cpetot.repository.MovieRepository;
 
@@ -37,5 +40,14 @@ public class MovieService {
 			}
 		}
 		return availableMovies;
+	}
+
+	@Transactional
+	public Movie create(String title, ContentRating rating) {
+		if (movieRepository.findByTitle(title) != null) {
+			throw new MovieAlreadyExistException(title);
+		}
+
+		return movieRepository.save(new Movie(title, rating));
 	}
 }

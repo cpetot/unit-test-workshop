@@ -5,10 +5,13 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cpetot.entities.Movie;
+import com.cpetot.enums.ContentRating;
 import com.cpetot.repository.MovieRepository;
 import com.cpetot.services.MovieService;
 
@@ -30,6 +33,12 @@ public class MovieController {
 	@GetMapping("/minAge/{minAge}")
 	public List<Movie> findMoviesAvailableForAge(@PathVariable("minAge") int minAge) {
 		return movieService.findMoviesAvailableForAge(minAge);
+	}
+
+	@PostMapping
+	public Movie create(@RequestParam String title,
+						@RequestParam ContentRating rating) {
+		return movieService.create(title, rating);
 	}
 
 }

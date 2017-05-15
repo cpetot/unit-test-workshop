@@ -3,8 +3,11 @@ package com.cpetot.service;
 import static com.cpetot.MockInitialisations.mockMovieAvailableForAge;
 import static java.util.Arrays.asList;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.fail;
+import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.verifyZeroInteractions;
 import static org.mockito.Mockito.when;
 
@@ -13,11 +16,16 @@ import java.util.List;
 import org.assertj.core.api.Assertions;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.AdditionalAnswers;
+import org.mockito.ArgumentCaptor;
+import org.mockito.Captor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import com.cpetot.entities.Movie;
+import com.cpetot.enums.ContentRating;
+import com.cpetot.exceptions.MovieAlreadyExistException;
 import com.cpetot.exceptions.MovieNotFoundException;
 import com.cpetot.repository.MovieRepository;
 import com.cpetot.services.MovieService;
@@ -30,6 +38,9 @@ public class MovieServiceTest {
 
 	@InjectMocks
 	private MovieService movieService;
+
+	@Captor
+	private ArgumentCaptor<Movie> movieCaptor;
 
 	// Tests de la méthode getByTitle
 	@Test
@@ -126,5 +137,51 @@ public class MovieServiceTest {
 		for (Movie movie : allMovies) {
 			verify(movie).isAvailableForAge(age);
 		}
+	}
+
+	@Test
+	public void shouldCreateTheMovie_WhenCreate_WithNoMovieExistingWithSameTitle() {
+		// Given
+		String title = "foo";
+		ContentRating rating = ContentRating.TOUT_PUBLIC;
+		when(movieRepository.save(any(Movie.class))).thenAnswer(AdditionalAnswers.returnsFirstArg());
+
+		// When
+		Movie result = movieService.create(title, rating);
+
+		// Then
+		verify(movieRepository).findByTitle(title);
+		verify(movieRepository).save(movieCaptor.capture());
+
+		Movie savedMovie = movieCaptor.getValue();
+		assertThat(savedMovie)
+				.isNotNull()
+				.isEqualTo(result)
+				.extracting("title", "rating")
+				.containsExactly(title, rating);
+	}
+
+	@Test
+	public void shouldThrowException_WhenCreate_WithMovieExistingWithSameTitle() {
+		// Given
+		String title = "foo";
+		ContentRating rating = ContentRating.TOUT_PUBLIC;
+
+		Movie existingMovie = mock(Movie.class);
+		when(movieRepository.findByTitle(title)).thenReturn(existingMovie);
+
+		try {
+			// When
+			Movie result = movieService.create(title, rating);
+			fail("Création impossible, le film foo existe déjà");
+		}
+		catch (MovieAlreadyExistException e) {
+			// Then
+			assertThat(e).hasMessage("fds");
+
+			verify(movieRepository).findByTitle(title);
+			verifyNoMoreInteractions(movieRepository);
+		}
+
 	}
 }
