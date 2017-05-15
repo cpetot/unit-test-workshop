@@ -1,5 +1,6 @@
 package com.cpetot.services;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
@@ -27,7 +28,14 @@ public class MovieService {
 	}
 
 	public List<Movie> findMoviesAvailableForAge(int minAge) {
-		// A implémenter correctement
-		return movieRepository.findAll();
+		List<Movie> allMovies = movieRepository.findAll();
+		List<Movie> availableMovies = new ArrayList<>();
+
+		for (Movie movie : allMovies) {
+			if (movie.isAvailableForAge(minAge)) {
+				availableMovies.add(movie);
+			}
+		}
+		return availableMovies;
 	}
 }
