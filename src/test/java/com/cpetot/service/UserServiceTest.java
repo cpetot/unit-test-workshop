@@ -3,7 +3,7 @@ package com.cpetot.service;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.runners.MockitoJUnitRunner;
+import org.mockito.junit.MockitoJUnitRunner;
 
 import com.cpetot.repository.MovieRepository;
 import com.cpetot.repository.UserRepository;
