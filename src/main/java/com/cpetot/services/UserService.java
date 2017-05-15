@@ -44,7 +44,7 @@ public class UserService {
 		User user = this.getUser(username);
 		Movie movie = movieService.getByTitle(movieTitle);
 
-		if (movie.isAvailableForAge(user.getAge())) {
+		if (!movie.isAvailableForAge(user.getAge())) {
 			throw new UserNotAllowedToWatchException(user.getAge(), movie.getRating().name());
 		}
 
