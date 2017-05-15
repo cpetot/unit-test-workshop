@@ -1,6 +1,7 @@
 # Exercice 4 : Mockito & AssertJ level 2
 
-Le but de l'exercice est d'approfondir l'utilisation de AssertJ et Mockito.
+Félicitations pour être arrivé jusqu'ici !
+Le but de l'exercice est d'approfondir l'utilisation de AssertJ et Mockito en testant MovieService.
 
 ### 1. getByTitle
 Ecrivez tous les tests nécessaires.

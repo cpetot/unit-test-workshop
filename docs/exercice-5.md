@@ -1,6 +1,7 @@
-# Exercice 4 : Mockito plus avancé
+# Exercice 5 : Mockito plus avancé
 
-Le but de l'exercice est d'apprendre comment capturer des arguments avec Mockito
+Bravo, tu es vraiment allé vite !
+Le but de l'exercice est d'apprendre comment capturer des arguments avec Mockito.
 
 ### 1. Permettez à l'application de créer un film
 - Modifiez le repository et le service pour permettre la création d'un film.
