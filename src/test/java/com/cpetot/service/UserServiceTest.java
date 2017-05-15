@@ -1,22 +1,17 @@
 package com.cpetot.service;
 
-import static org.junit.rules.ExpectedException.none;
-
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.rules.ExpectedException;
+import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.runners.MockitoJUnitRunner;
 
 import com.cpetot.repository.MovieRepository;
 import com.cpetot.repository.UserRepository;
 import com.cpetot.services.MovieService;
 import com.cpetot.services.UserService;
 
+@RunWith(MockitoJUnitRunner.class)
 public class UserServiceTest {
-
-	@Rule
-	public ExpectedException thrown = none();
 
 	@Mock
 	private UserRepository userRepository;
@@ -31,10 +26,6 @@ public class UserServiceTest {
 	private UserService userService;
 
 	// Tests de la méthode getUser
-	@Test
-	public void shouldThrowException_WhenGetUser_WithUsernameNull() {
-
-	}
 
 	// Tests de la méthode addToWatchList
 
