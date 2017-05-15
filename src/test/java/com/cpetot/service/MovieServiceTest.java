@@ -41,7 +41,26 @@ public class MovieServiceTest {
 		catch (IllegalArgumentException e) {
 			// Then
 			assertThat(e)
-					.hasMessage("Title must not be null");
+					.hasMessage("Title must not be blank");
+		}
+
+		verifyZeroInteractions(movieRepository);
+	}
+
+	@Test
+	public void shouldThrowException_WhenGetMovie_WithTitleBlank() {
+		// Given
+		String title = "  ";
+
+		try {
+			// When
+			movieService.getByTitle(title);
+			Assertions.fail("We should not return any movie");
+		}
+		catch (IllegalArgumentException e) {
+			// Then
+			assertThat(e)
+					.hasMessage("Title must not be blank");
 		}
 
 		verifyZeroInteractions(movieRepository);
