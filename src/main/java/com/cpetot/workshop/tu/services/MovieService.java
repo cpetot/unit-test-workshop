@@ -1,7 +1,9 @@
 package com.cpetot.workshop.tu.services;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
@@ -17,7 +19,7 @@ public class MovieService {
 	private MovieRepository movieRepository;
 
 	public Movie getByTitle(String title) {
-		Assert.notNull(title, "Title must not be null");
+		Assert.isTrue(StringUtils.isNotBlank(title), "Title must not be blank");
 		Movie movie = this.movieRepository.findByTitle(title);
 		if (movie == null) {
 			throw new MovieNotFoundException(title);
@@ -26,7 +28,8 @@ public class MovieService {
 	}
 
 	public List<Movie> findMoviesAvailableForAge(int minAge) {
-		// A implémenter correctement
-		return movieRepository.findAll();
+		return movieRepository.findAll().stream()
+				.filter(movie -> movie.isAvailableForAge(minAge))
+				.collect(Collectors.toList());
 	}
 }
