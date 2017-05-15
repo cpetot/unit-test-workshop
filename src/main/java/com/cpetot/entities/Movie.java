@@ -33,6 +33,11 @@ public class Movie {
 	public Movie() {
 	}
 
+	public Movie(ContentRating rating) {
+		this();
+		this.rating = rating;
+	}
+
 	public boolean isAvailableForAge(int minAge) {
 		return minAge >= rating.minAge();
 	}

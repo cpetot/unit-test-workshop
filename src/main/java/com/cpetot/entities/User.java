@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import com.cpetot.exceptions.MovieAlreadyInWatchlistException;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
@@ -51,7 +52,16 @@ public class User {
 		watchList = new ArrayList<>();
 	}
 
+	public User(String username, Integer age) {
+		this();
+		this.username = username;
+		this.age = age;
+	}
+
 	public void addWatchMovie(Movie movie) {
+		if (watchList.contains(movie)) {
+			throw new MovieAlreadyInWatchlistException(username, movie.getTitle());
+		}
 		watchList.add(movie);
 	}
 
