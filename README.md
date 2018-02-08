@@ -1,13 +1,13 @@
 # Workshop de tests unitaires
 
-Il s'agit d'un projet Spring Boot en Java 7.
+Il s'agit d'un projet Spring Boot 2 en Java 8.
 Le but est d'apprendre à utiliser Junit, Mockito et AssertJ.
 La base de données est H2 en mémoire.
 Il n'y a pas d'IHM mais Swagger permet d'appeler facilement l'API.
 
 ## Prérequis
 
-* Java 7
+* Java 8
 * [Apache Maven 3.x](http://maven.apache.org/)
 * Git
 
