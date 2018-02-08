@@ -14,3 +14,4 @@ NB : il doit s'agit d'une requête POST avec 2 @RequestParam
 - Utilisez un ArgumentCaptor pour vérifier le Movie enregistré par le repository.
 - Utilisez l'annotation @Captor pour faciliter l'écriture.
 - Utilisez la méthode "extracting" de AssertJ pour vérifier que les propriété du film ont été correctement renseignées.
+  Vous êtes encouragés à utiliser les références de fonction pour extraire les valeurs.

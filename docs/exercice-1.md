@@ -1,6 +1,6 @@
 # Exercice 1 : les débuts avec AssertJ
 
-Le but de l'exercice est d'apprendre à utiliser AssertJ et ExpectedException.
+Le but de l'exercice est d'apprendre à utiliser AssertJ, y compris pour les exceptions avec Assertions.assertThatThrownBy.
 
 ### 1. Tests de Movie
 
