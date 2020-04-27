@@ -18,4 +18,10 @@ public class MockInitialisations {
 		when(movie.getRating()).thenReturn(contentRating);
 		return movie;
 	}
+
+	public static Movie mockMovieAvailableForAge(int age, boolean available) {
+		Movie movie = mock(Movie.class);
+		when(movie.isAvailableForAge(age)).thenReturn(available);
+		return movie;
+	}
 }
