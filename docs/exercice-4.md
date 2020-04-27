@@ -8,9 +8,9 @@ Ecrivez tous les tests nécessaires.
 
 ### 2. Optimisation
 
-Lorsqu'une chaine blanche est passée en paramètre de getByTitle, je ne veux pas effectuer une requête en base de donnée et renvoyer une erreur.
+Lorsqu'une chaine blanche est passée en paramètre de `getByTitle`, je ne veux pas effectuer une requête en base de donnée et renvoyer une erreur.
 - Réfléchissez aux tests nécessaires.
-- Etudiez ce que propose assertThat(aString) pour avoir le test le plus lisible puis écrivez les tests.
+- Etudiez ce que propose `assertThat(aString)` pour avoir le test le plus lisible puis écrivez les tests.
 - Refactorez la méthode en conséquence (pensez à StringUtils)
 
 ### 3. Ajout de findMoviesAvailableForAge
@@ -18,7 +18,8 @@ Lorsqu'une chaine blanche est passée en paramètre de getByTitle, je ne veux pa
 Le but est de retourner uniquement les films qu'on peut voir pour un âge donné en paramètre.
 Allez lire la méthode correspondante dans le service : son implémentation est incomplète.
 - Réfléchissez aux cas à tester et écrivez un test tirant pleinement partie de AssertJ.
-- Etudiez ce que propose assertThat(aList) pour avoir le test le plus lisible puis écrivez les tests.
+- Etudiez ce que propose `assertThat(aList)` pour avoir le test le plus lisible puis écrivez les tests.
 - Modifiez la méthode pour qu'elle ait le comportement désiré en vous appuyant sur les tests écrits.
 
-NB : le but du test est de faire le filtre en mémoire, pas en base de données.
+**NB** : le but du test est de faire le filtre en mémoire, pas en base de données.
+Bien évidemment, ceci n'a de sens que pour le workshop et pas dans un contexte projet réel.

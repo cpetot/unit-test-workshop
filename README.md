@@ -1,14 +1,20 @@
 # Workshop de tests unitaires
 
-Il s'agit d'un projet Spring Boot 2.1 en Java 11.
-Le but est d'apprendre à utiliser Junit, Mockito et AssertJ.
-La base de données est H2 en mémoire.
+Il s'agit d'un projet Spring Boot 2.2 en Java 11, avec une base de données H2 en mémoire.
+
 Il n'y a pas d'IHM mais Swagger permet d'appeler facilement l'API.
+
+**NB** : l'architecture du projet est simpliste et ne doit pas servir de modèle.
+
+## But
+Le but est d'apprendre à utiliser **Junit 5**, **Mockito** et **AssertJ**.
+
+Le dernier exercice donne un aperçu sur **ArchUnit**.
 
 ## Prérequis
 
-* Java 11
-* [Apache Maven 3.x](http://maven.apache.org/)
+* [Java 11](https://adoptopenjdk.net/)
+* [Maven 3.8+](http://maven.apache.org/)
 * Git
 
 ## How to
@@ -20,18 +26,12 @@ Il n'y a pas d'IHM mais Swagger permet d'appeler facilement l'API.
     ```
 
 2. Exécuter le projet
-    En ligne de commande :
-    ```
+    - En ligne de commande :
+    ``
     $ mvn spring-boot:run
-    ```
+    ``
+    - Ou via  la classe [WorkshopUnitTestsApplication](src/main/java/com/cpetot/workshop/tu/WorkshopUnitTestsApplication) : lancez la méthode `main()`
 
+3. Accéder à [http://localhost:8080](http://localhost:8080)
 
-    Via la classe Application : lancez la méthode main()
-
-3. Accéder a:
-
-    ```
-    http://localhost:8080
-    ```
-
-4. Effectuez les exercices du répertoire doc.
+4. Effectuez les exercices du répertoire [docs](docs/exercice-1.md).

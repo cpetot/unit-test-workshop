@@ -1,17 +1,20 @@
 package com.cpetot.workshop.tu.service;
 
 import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.DisplayNameGeneration;
+import org.junit.jupiter.api.DisplayNameGenerator;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import com.cpetot.workshop.tu.repository.MovieRepository;
 import com.cpetot.workshop.tu.repository.UserRepository;
 import com.cpetot.workshop.tu.services.MovieService;
 import com.cpetot.workshop.tu.services.UserService;
 
-@RunWith(MockitoJUnitRunner.class)
+@ExtendWith(MockitoExtension.class)
+@DisplayNameGeneration(DisplayNameGenerator.ReplaceUnderscores.class)
 public class UserServiceTest {
 
 	@Mock
@@ -28,7 +31,7 @@ public class UserServiceTest {
 
 	// Tests de la méthode getUser
 	@Test
-	public void should_do_something() {
+	public void should_do_something_when_getUser_with_XXX() {
 
 	}
 
